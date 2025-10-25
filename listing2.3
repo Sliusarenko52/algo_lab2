@@ -1,0 +1,68 @@
+def quicksort(a, l, r):
+    comparisons = 1 
+    
+    call_count = 0 
+    
+    if l < r:
+        p, c, a_count = partition(a, l, r)
+        
+        lc, la, calls_l = quicksort(a, l, p)
+        
+        rc, ra, calls_r = quicksort(a, p + 1, r)
+        
+        total_c = comparisons + c + lc + rc
+        
+        total_a = 9 + a_count + la + ra
+        
+        total_calls = 2 + calls_l + calls_r
+        
+        return total_c, total_a, total_calls
+    else:
+        return comparisons, 0, call_count
+
+
+def partition(a, l, r):
+    pivot = a[(l + r) // 2]
+    i = l - 1
+    j = r + 1
+    comparisons = 0
+    assignments = 4 
+
+    while True:
+        i += 1
+        assignments += 1
+        while a[i] < pivot:
+            comparisons += 1
+            i += 1
+            assignments += 1
+        comparisons += 
+        
+        j -= 1
+        assignments += 1
+        while a[j] > pivot:
+            comparisons += 1
+            j -= 1
+            assignments += 1
+        comparisons += 1  
+        
+        comparisons += 1 
+        if i >= j:
+            return j, comparisons, assignments
+
+        a[i], a[j] = a[j], a[i]
+        assignments += 3
+
+
+my_list = [21, 44, 22, 50, 63, 68, 97, 12, 15]
+original = my_list.copy()
+
+print("Оригінальний список:", original)
+
+total_comparisons, total_assignments, recursive_calls = quicksort(my_list, 0, len(my_list) - 1)
+
+total_calls = recursive_calls + 1
+
+print("Відсортований список:", my_list)
+print(f"Загальна кількість порівнянь: {total_comparisons}")
+print(f"Загальна кількість присвоєнь: {total_assignments}")
+print(f"Загальна кількість викликів (включно з початковим): {total_calls}")
